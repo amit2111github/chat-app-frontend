@@ -1,0 +1,17 @@
+div.feed-body {
+	width: 100%;
+	margin: 0 auto;
+	background: #eee;
+	overflow-x: hidden;
+}
+
+.icon {
+	height: 40px;
+	width: 40px;
+}
+
+.button {
+	background: transparent;
+	outline: none;
+	border: none;
+}
