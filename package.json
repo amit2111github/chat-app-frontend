@@ -34,6 +34,7 @@
     "react-loader": "^2.4.7",
     "react-password-toggle-icon": "^1.1.5",
     "react-responsive-carousel": "^3.2.22",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
     "saas": "^1.0.0",
     "simple-peer": "^9.11.0",
