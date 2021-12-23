@@ -39,6 +39,7 @@
     "react-slick": "^0.28.1",
     "saas": "^1.0.0",
     "simple-peer": "^9.11.0",
+    "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.4.0",
     "timediff": "^1.1.1",
     "uuid": "^8.3.2",
