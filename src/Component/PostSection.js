@@ -7,6 +7,8 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Menu from "./Menu";
 import Footer from "./Footer"
+import Sidebar from "./Sidebar"
+import Widgets from "./Widgets"
 import { getAllPost, isSignedIn, likeComment, sendPost, getPostOnSkip, likePost, commentCreation } from "../apicaller/auth"
 import { errorMessage, successMessage, loadingMessage, loader } from './Message';
 const PostSection = ({ history }) => {
@@ -121,121 +123,113 @@ const PostSection = ({ history }) => {
         setPost(newPost);
     };
     return (
-        <div className="feed-body" style={{ backgroundColor: "#f0de6e" }}>
+        <div style={{ backgroundColor: "#f1f2f5", width: "100%", overflow: "hidden" }}>
+            <div >
+                <Menu />
 
-            <Menu />
-            <div className="logo_section" style={{ height: "100px" }}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="logo">
-                                <a href>
-                                    <img
-                                        alt="logo"
-                                        style={{ maxwidth: "100%" }}
-                                        src="https://fontmeme.com/permalink/211220/293d7532b26cd531b84fcc2c6d4fa661.png"
+            </div>
+
+            <div className="app-body row">
+                <Sidebar history={history} />
+                <div className="feed col-7" >
+                    <div className="mt-4" style={{ width: "100%", marginTop: "30px" }}>
+                        {error && errorMessage(error)}
+                        {success && successMessage('Post is posted')}
+                        {loading && loadingMessage('Processing...')}
+                        <div className="row mb-2 mt-3">
+                            <div className="col-8 mb-3 d-flex flex-row">
+                                <svg
+                                    onClick={() => setShowEmojiSelector(!showEmojiSelector)}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="icon"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                     />
-                                </a>
+                                </svg>
+
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    placeholder="Add New Post"
+                                    value={postDescription}
+                                    onChange={handleChange}
+                                    style={{ width: "100%" }}
+                                />
+
+
+                                <input
+                                    ref={attachmentRef}
+                                    multiple="multiple"
+                                    type="file"
+                                    name="attachment"
+                                    style={{ display: 'none' }}
+                                />
                             </div>
+
+                            <div className="col-4" style={{ width: "150px", marginLeft: "40px" }}>
+                                <img
+                                    type="file"
+                                    onClick={() => attachmentRef.current.click()}
+                                    style={{ width: '35px', height: '40px', paddingRight: "6px" }}
+                                    alt="attachment"
+                                    src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-attachment-basic-ui-elements-flatart-icons-outline-flatarticons.png"
+                                />
+                                <button
+                                    ref={postButtonRef}
+                                    className="btn btn-primary shadow btn-md"
+                                    onClick={handlePostSubmit}
+
+                                >
+                                    Post
+                                </button>
+                            </div>
+                            {showEmojiSelector && (
+                                <div className="col-8 offset-1 mb-3">
+                                    <Picker onSelect={(e) => setpostDescription((oldValue) => oldValue + e.native)} />
+                                </div>
+                            )}
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className="container mt-4" style={{ width: "80%", marginTop: "30px" }}>
-                {error && errorMessage(error)}
-                {success && successMessage('Post is posted')}
-                {loading && loadingMessage('Processing...')}
-                <div className="row mb-2 justify-content-center mt-3">
-                    <div className="col-6 offset-2 mb-3 d-flex">
-                        <input
-                            className="form-control"
-                            type="text"
-                            placeholder="Add New Post"
-                            value={postDescription}
-                            onChange={handleChange}
-                        />
-
-                        <svg
-                            style={{ marginLeft: '25px' }}
-                            onClick={() => setShowEmojiSelector(!showEmojiSelector)}
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
+                    <div >
+                        <InfiniteScroll
+                            className="container"
+                            dataLength={post.length}
+                            next={getMorePost}
+                            hasMore={hasMorePost}
+                            loader={<h4 className="text-center"></h4>}
+                            endMessage={
+                                <p style={{ textAlign: 'center' }}>
+                                </p>
+                            }
+                            refreshFunction={getMorePost}
+                            pullDownToRefresh
+                            pullDownToRefreshThreshold={50}
+                            pullDownToRefreshContent={
+                                <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
+                            }
+                            releaseToRefreshContent={
+                                <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
+                            }
                         >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                        </svg>
-
-                        <input
-                            ref={attachmentRef}
-                            multiple="multiple"
-                            type="file"
-                            name="attachment"
-                            style={{ display: 'none' }}
-                        />
+                            {post.map((post, index) => (
+                                <Post key={post._id} post={post} increaseCommentLike={increaseCommentLike} increasePostLike={increasePostLike} index={index} handleChange={handleChange} handleCommentSubmit={handleCommentSubmit} commentText={comment} />
+                            ))}
+                            {showLoader && loader()}
+                        </InfiniteScroll>
                     </div>
-
-                    <div className="col-4">
-                        <img
-                            type="file"
-                            onClick={() => attachmentRef.current.click()}
-                            style={{ width: '35px', height: '40px', marginRight: '20px', }}
-                            alt="attachment"
-                            src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-attachment-basic-ui-elements-flatart-icons-outline-flatarticons.png"
-                        />
-                        <button
-                            ref={postButtonRef}
-                            className="btn btn-primary shadow btn-md"
-                            onClick={handlePostSubmit}
-                            style={{ width: "25%" }}
-                        >
-                            Post
-                        </button>
-                    </div>
-                    {showEmojiSelector && (
-                        <div className="col-8 offset-1 mb-3">
-                            <Picker onSelect={(e) => setpostDescription((oldValue) => oldValue + e.native)} />
-                        </div>
-                    )}
                 </div>
-            </div>
-            <div className="mb-3">
-                <InfiniteScroll
-                    className="container"
-                    dataLength={post.length}
-                    next={getMorePost}
-                    hasMore={hasMorePost}
-                    loader={<h4 className="text-center"></h4>}
-                    endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                        </p>
-                    }
-                    refreshFunction={getMorePost}
-                    pullDownToRefresh
-                    pullDownToRefreshThreshold={50}
-                    pullDownToRefreshContent={
-                        <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
-                    }
-                    releaseToRefreshContent={
-                        <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
-                    }
-                >
-                    {post.map((post, index) => (
-                        <Post key={post._id} post={post} increaseCommentLike={increaseCommentLike} increasePostLike={increasePostLike} index={index} handleChange={handleChange} handleCommentSubmit={handleCommentSubmit} commentText={comment} />
-                    ))}
-                    {showLoader && loader()}
-                </InfiniteScroll>
-
+                <Widgets />
             </div>
 
             <Footer />
-        </div>
+        </div >
     )
 
 }

@@ -9,26 +9,26 @@ div.post-content {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 .post-options {
-  padding-top: 10px;
+  padding-top: 5px;
   border-top: 1px solid lightgray;
   display: flex;
   justify-content: space-evenly;
   font-size: medium;
   color: gray;
   cursor: pointer;
-  padding: 10px;
+  padding: 5px;
 }
 
 .post-option {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
   flex: 1;
 }
 
 .post-option > p {
   margin-left: 10px;
+  font-size: 15px;
   margin-top: 10px;
 }
 
@@ -58,15 +58,15 @@ div.post-content .post-header .post-header-info strong {
 }
 
 div.post-content .post-header .post-header-info small {
-  font-size: 11px;
+  font-size: 13px;
   color: #9a9a9a;
   margin-top: 2px;
 }
 
 div.post-content > p {
-  font-size: 14px;
-  margin-top: 15px;
-  padding-bottom: 20px;
+  font-size: 20px;
+  margin-top: 5px;
+  padding-bottom: 5px;
 }
 
 ul.comment {
@@ -91,7 +91,7 @@ ul.comment li p {
   line-height: 20px;
   background: #eee;
   border-radius: 20px;
-  min-width: 600px;
+  min-width: 500px;
   padding: 10px 15px;
   margin-left: 10px;
 }

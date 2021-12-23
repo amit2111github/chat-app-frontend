@@ -122,7 +122,7 @@ const Contact = ({ history }) => {
                           className="btn btn-md rounded btn-danger m-3 flow-right"
                           onClick={(event) => handleDelete(event, user)}
                         >
-                          Delete
+                          Unfollow
                         </button>
                       </div>
                     </div>

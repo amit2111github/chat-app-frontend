@@ -5,10 +5,9 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import NearMeIcon from '@material-ui/icons/NearMe'
-import { ExpandMoreOutlined, NearMe } from '@material-ui/icons'
+import { ExpandMoreOutlined } from '@material-ui/icons'
 import CommentBox from './CommentBox'
 import { isSignedIn } from '../apicaller/auth'
-import ImageGallery from 'react-image-gallery';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -60,7 +59,7 @@ const Post = ({
 		arrow: "dark"
 	};
 	return (
-		<div className="post-content">
+		<div className="post-content" style={{ width: "100%" }}>
 			<div className="post-header">
 				<img src="https://i.imgur.com/t9toMAQ.jpg" alt="Avatar" />
 				<div className="post-header-info">
@@ -68,16 +67,18 @@ const Post = ({
 					<small>{time} ago</small>
 				</div>
 			</div>
-			<p style={{ fontSize: '15px', fontWeight: 'normal' }}>{description}</p>
+			<p style={{ fontSize: '20px', fontWeight: 'normal' }}>{description}</p>
 			<Slider {...settings}>
 				{post.links.map((url, imageIndex) => {
 					return (
-						<div style={{ width: '70%', height: '100px' }} className="container">
+						<div style={{ width: "100%", height: "400px" }} className="container d-flex justify-content-center">
 							<img
+								className="container"
 								src={url}
 								key={imageIndex}
 								className="rounded border mb-1"
-								style={{ width: "100%", height: "300px" }}
+								style={{ width: "80%", height: "250px" }}
+								alt="Avtar"
 							/>
 						</div>
 					)
@@ -120,9 +121,6 @@ const Post = ({
 						handleChange={handleChange}
 						handleCommentSubmit={handleCommentSubmit}
 					/>
-					<div>
-						<input type="text" placeholder="" />
-					</div>
 					{comment.map((comment, commentIndex) => {
 						let colorForLikeButton = 'grey'
 						comment.like.forEach((users) => {
@@ -130,7 +128,7 @@ const Post = ({
 						})
 
 						return (
-							<li key={comment._id} style={{ width: '100%' }}>
+							<li key={comment._id} >
 								<img src="https://i.imgur.com/t9toMAQ.jpg" alt="Avatar" />
 								<div
 									style={{ marginLeft: '10px', fontWeight: 'lighter' }}
@@ -144,8 +142,8 @@ const Post = ({
 									/>
 									{comment.like.length}
 								</div>
-								<p>
-									<strong>{comment.commentBy.name} : </strong>{' '}
+								<p style={{ width: "200px" }}>
+									<strong>{comment.commentBy.name} : </strong>
 									{comment.description}
 								</p>
 							</li>
