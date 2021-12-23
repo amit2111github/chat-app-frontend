@@ -21,10 +21,10 @@ const SidebarRow = ({ src, Icon, title, onClick }) => {
 }
 const Sidebar = ({ history }) => {
     const { user } = isSignedIn();
-    user.photoURL = user.name[0];
+    if (isSignedIn()) user.photoURL = user.name[0];
     return (
         <div className="sidebar col-2">
-            <SidebarRow src={user.photoURL} title={user.displayName} />
+            {isSignedIn() && <SidebarRow src={user.photoURL} title={user.displayName} />}
             <SidebarRow
                 Icon={LocalHospitalIcon}
                 title="COVID-19 Information Center"
