@@ -64,7 +64,7 @@ const Video = () => {
         setStream(stream);
         myVideoRef.current.srcObject = stream;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err + " dangit"));
   }, []);
 
   useEffect(() => {
