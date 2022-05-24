@@ -57,7 +57,7 @@ const Video = () => {
   useEffect(() => {
     let tempPeer = new Peer(user._id);
     setPeer(tempPeer);
-    window.navigator.mediaDevices
+    window?.navigator?.mediaDevices?
       .getUserMedia({ audio: true, video: true })
       .then((stream) => {
         console.log(stream);
