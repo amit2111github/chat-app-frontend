@@ -14,9 +14,15 @@ import PasswordResetPage from "./Component/PasswordResetPage";
 import Video from "./Component/Video";
 import PostSection from "./Component/PostSection"
 import ChatToAnyOne from "./Component/ChatToAnyOne"
-
+import {MyContext} from "./Context"
 const Routes = () => {
+  const [socket , setSocket] = React.useState(() => {
+    return localStorage.getItem("socket");
+  });
+  // console.log(socket );
+  console.log("socket from routes");
   return (
+    <MyContext.Provider value = {{socket : null , setSocket}}>
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={PostSection} />
@@ -49,6 +55,7 @@ const Routes = () => {
         <Route component={PageNotFound} />
       </Switch>
     </BrowserRouter>
+    </MyContext.Provider>
   );
 };
 
