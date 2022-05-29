@@ -51,15 +51,13 @@ const Video = () => {
       },
     });
     setSocket(temp_socket);
-  }, []);
-
-  // stream setting
-  useEffect(() => {
-    let tempPeer = new Peer(user._id);
+    let tempPeer = new Peer();
+    tempPeer.on("open" , id =>{
+      console.log("is id "  + id);
+      temp_socket.emit("peerId" , {userId : user._id , peerId : id});
+    })
     setPeer(tempPeer);
-    window?.navigator?.mediaDevices?
-      .getUserMedia({ audio: true, video: true })
-      .then((stream) => {
+    window?.navigator?.mediaDevices?.getUserMedia({ audio: true, video: true }).then((stream) => {
         console.log(stream);
         setStream(stream);
         myVideoRef.current.srcObject = stream;
@@ -69,9 +67,6 @@ const Video = () => {
 
   useEffect(() => {
     if (!peer) return;
-    peer.on("open", (id) => {
-      // console.log("My peer ID is: " + id);
-    });
 
     if (socket) {
       socket.on("callComing", (payload) => {
@@ -172,21 +167,27 @@ const Video = () => {
     setPersonOnCall(false);
     setPeopleOnCall([]);
   };
-
   const makeCall = (event) => {
-    console.log("make call");
-    const callRequest = peer.call(secondUser._id, stream);
-    console.log(callRequest);
-    setPersonOnCall(secondUser);
-    callRequest.on("stream", (friendVide) => {
-      setcallAccepted(true);
-      setFriendStream(friendVide);
-      setCallIsActive(true);
-      friendVideoRef.current.srcObject = friendVide;
-    });
-    setPersonWhoIsCalling(user);
-    socket.emit("callmaking", { callTo: secondUser, callBy: user });
-    console.log("call  made");
+    // console.log("make call");
+    socket.emit("getPeerId" , {userId : secondUser._id , myId : user._id});
+    socket.on("getPeerId" , ({error , peerId , myId})  => {
+      console.log("GOT RESPONSE");
+      console.log(myId)
+      if(myId !== user._id) return;
+      if(error) alert(error);
+      else {
+        const callRequest = peer.call(peerId, stream);    
+        setPersonOnCall(secondUser);
+        callRequest.on("stream", (friendVide) => {
+          setcallAccepted(true);
+          setFriendStream(friendVide);
+          setCallIsActive(true);
+          friendVideoRef.current.srcObject = friendVide;
+        });
+        setPersonWhoIsCalling(user);
+        socket.emit("callmaking", { callTo: secondUser, callBy: user });
+      }
+    })
   };
 
   const answerCall = () => {

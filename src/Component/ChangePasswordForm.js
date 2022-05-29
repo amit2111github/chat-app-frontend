@@ -25,21 +25,21 @@ const ChangePasswordForm = React.forwardRef((props, ref) => {
 							name="password"
 						/>
 						<ReactPasswordToggleIcon
-							inputRef={showPasswordRef}
-							style={{ marginTop: '40px' }}
-							hideIcon={() => {
-								if (showConfirmPasswordRef.currnet) {
-									showConfirmPasswordRef.current.type = 'password';
-								}
-								return <i className="fa fa-eye" aria-hidden="true"></i>;
-							}}
-							showIcon={() => {
-								if (showConfirmPasswordRef.currnet) {
-									showConfirmPasswordRef.current.type = 'text';
-								}
-								return <i className="fa fa-eye-slash" aria-hidden="true"></i>;
-							}}
-						/>
+						 	inputRef={showPasswordRef}
+						 	style={{ marginTop: '40px' }}
+						 	hideIcon={() => {
+						 		if (showConfirmPasswordRef.currnet) {
+						 			showConfirmPasswordRef.current.type = 'password';
+						 		}
+						 		return <i className="fa fa-eye" aria-hidden="true"></i>;
+						 	}}
+						 	showIcon={() => {
+						 		if (showConfirmPasswordRef.currnet) {
+						 			showConfirmPasswordRef.current.type = 'text';
+						 		}
+						 		return <i className="fa fa-eye-slash" aria-hidden="true"></i>;
+						 	}}
+						 />
 					</div>
 					<div className="mb-3 form-group" style={{ position: 'relative' }}>
 						<h5 className="fw-bold">Confirn Password</h5>
@@ -53,23 +53,23 @@ const ChangePasswordForm = React.forwardRef((props, ref) => {
 							onChange={handleChange}
 							name="confirmPassword"
 						/>
-						<ReactPasswordToggleIcon
-							inputRef={showConfirmPasswordRef}
-							style={{ marginTop: '40px' }}
-							hideIcon={() => {
-								if (showConfirmPasswordRef.currnet) {
-									showConfirmPasswordRef.current.type = 'password';
-								}
-
-								return <i className="fa fa-eye" aria-hidden="true"></i>;
-							}}
-							showIcon={() => {
-								if (showConfirmPasswordRef.currnet) {
-									showConfirmPasswordRef.current.type = 'text';
-								}
-								return <i className="fa fa-eye-slash" aria-hidden="true"></i>;
-							}}
-						/>
+ 						<ReactPasswordToggleIcon
+ 							inputRef={showConfirmPasswordRef}
+ 							style={{ marginTop: '40px' }}
+ 							hideIcon={() => {
+ 								if (showConfirmPasswordRef.currnet) {
+ 									showConfirmPasswordRef.current.type = 'password';
+ 								}
+ 
+ 								return <i className="fa fa-eye" aria-hidden="true"></i>;
+ 							}}
+ 							showIcon={() => {
+ 								if (showConfirmPasswordRef.currnet) {
+ 									showConfirmPasswordRef.current.type = 'text';
+ 								}
+ 								return <i className="fa fa-eye-slash" aria-hidden="true"></i>;
+ 							}}
+ 						/>
 					</div>
 					<div class="addtoCart mb-4">
 						<a href onClick={handleSubmit} type="submit">
