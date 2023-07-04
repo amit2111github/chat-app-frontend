@@ -68,3 +68,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+![Screenshot from 2023-07-04 15-39-34](https://github.com/amit2111github/chat-app-frontend/assets/72341567/9d689528-22b8-4428-a4e2-237eb150e7b2)
+
+![Screenshot from 2023-07-04 15-39-46](https://github.com/amit2111github/chat-app-frontend/assets/72341567/26752564-b878-4c0b-9c0a-2adb139bc623)
+![Screenshot from 2023-07-04 15-40-22](https://github.com/amit2111github/chat-app-frontend/assets/72341567/ebb29ac8-919a-4fce-bb69-57c4096f719e)
+![Screenshot from 2023-07-04 15-41-25](https://github.com/amit2111github/chat-app-frontend/assets/72341567/71f76bbc-8af8-4b12-b786-b844b664d32d)
+
+![Screenshot from 2023-07-04 15-40-39](https://github.com/amit2111github/chat-app-frontend/assets/72341567/52bb3d7e-2d7e-4009-b4d1-65b35d41dd5d)
+![Screenshot from 2023-07-04 15-41-31](https://github.com/amit2111github/chat-app-frontend/assets/72341567/e2dd40fd-3ff3-4a5a-a250-a4853af681fe)
+![Screenshot from 2023-07-04 15-41-59](https://github.com/amit2111github/chat-app-frontend/assets/72341567/1b2adfff-b65e-4304-ae5d-d53bacec9d4f)
+
+![Screenshot from 2023-07-04 15-43-30](https://github.com/amit2111github/chat-app-frontend/assets/72341567/2d80f9b8-349b-475c-962d-00f002e94fa0)
+![Screenshot from 2023-07-04 15-43-45](https://github.com/amit2111github/chat-app-frontend/assets/72341567/41f9c941-e068-422a-95bd-77e2f92dbbad)
+
+![Screenshot from 2023-07-04 15-41-12](https://github.com/amit2111github/chat-app-frontend/assets/72341567/cdc76dd8-8acd-496a-9425-977d0047b62f)
+![Screenshot from 2023-07-04 15-43-08](https://github.com/amit2111github/chat-app-frontend/assets/72341567/78ab1a74-37da-47e0-b59d-40c1e26d8738)
+
+
