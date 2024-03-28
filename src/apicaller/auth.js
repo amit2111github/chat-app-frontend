@@ -1,10 +1,27 @@
-import { API } from '../backend.js';
+const API = "http://localhost:5000";
+export const getAllUser = async (user, token) => {
+	console.log(token);
+	try {
+		let data = await fetch(`${API}/user/${user._id}/getAll`, {
+			method: "get",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		data = await data.json();
+		return data;
+	} catch (err) {
+		return { err };
+	}
+};
 export const signin = (email, password) => {
 	return fetch(`${API}/home/signin`, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
+			Accept: "application/json",
+			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({ email, password }),
 	})
@@ -13,10 +30,10 @@ export const signin = (email, password) => {
 };
 export const signup = (name, email, password) => {
 	return fetch(`${API}/home/signup`, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
+			Accept: "application/json",
+			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({ name, email, password }),
 	})
@@ -25,14 +42,14 @@ export const signup = (name, email, password) => {
 };
 export const storeInLocalStorage = (data, next) => {
 	if (typeof window !== undefined) {
-		localStorage.setItem('jwt', JSON.stringify(data));
+		localStorage.setItem("jwt", JSON.stringify(data));
 		next();
 	}
 };
 export const isSignedIn = () => {
 	if (typeof window !== undefined) {
-		if (localStorage.getItem('jwt')) {
-			return JSON.parse(localStorage.getItem('jwt'));
+		if (localStorage.getItem("jwt")) {
+			return JSON.parse(localStorage.getItem("jwt"));
 		}
 	}
 	return false;
@@ -40,10 +57,10 @@ export const isSignedIn = () => {
 
 export const addToContact = (email, userId, token) => {
 	return fetch(`${API}/user/${userId}/create-contact`, {
-		method: 'PUT',
+		method: "PUT",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({ email }),
@@ -54,12 +71,12 @@ export const addToContact = (email, userId, token) => {
 
 export const signOut = () => {
 	if (typeof window !== undefined) {
-		localStorage.removeItem('jwt');
+		localStorage.removeItem("jwt");
 		return fetch(`${API}/home/signout`, {
-			method: 'GET',
+			method: "GET",
 			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
+				"Content-Type": "application/json",
+				Accept: "application/json",
 			},
 		})
 			.then((res) => res.json())
@@ -69,10 +86,10 @@ export const signOut = () => {
 
 export const getContactList = (userId, token) => {
 	return fetch(`${API}/user/${userId}/getAllContact`, {
-		method: 'GET',
+		method: "GET",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 	})
@@ -81,22 +98,22 @@ export const getContactList = (userId, token) => {
 };
 export const setItemInLocalStorageForChat = (user) => {
 	if (typeof window !== undefined) {
-		localStorage.setItem('friend', JSON.stringify(user));
+		localStorage.setItem("friend", JSON.stringify(user));
 	}
 };
 
 export const getFriend = () => {
 	if (typeof window !== undefined) {
-		return JSON.parse(localStorage.getItem('friend'));
+		return JSON.parse(localStorage.getItem("friend"));
 	}
 };
 
 export const getAllMessage = (userId, token, to) => {
 	return fetch(`${API}/message/${userId}/getAllMessage/${to}`, {
-		method: 'GET',
+		method: "GET",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 	})
@@ -104,26 +121,41 @@ export const getAllMessage = (userId, token, to) => {
 		.catch((err) => console.log(err));
 };
 
-export const sendMessage = (userId, token, description, sender, receiver) => {
+export const sendMessage = (
+	userId,
+	token,
+	description,
+	sender,
+	receiver,
+	forFuture,
+	time,
+) => {
 	return fetch(`${API}/message/send/${userId}`, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({ description, sender, receiver }),
+		body: JSON.stringify({
+			description,
+			sender,
+			receiver,
+			forFuture,
+			time,
+		}),
 	})
 		.then((res) => res.json())
 		.catch((err) => console.log(err));
 };
 
 export const deleteContact = (userId, token, email) => {
+	console.log("inside");
 	return fetch(`${API}/user/${userId}/remove-contact`, {
-		method: 'PUT',
+		method: "PUT",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({ email }),
@@ -132,11 +164,12 @@ export const deleteContact = (userId, token, email) => {
 		.catch((err) => console.log(err));
 };
 export const getAllPost = () => {
+	console.log(API);
 	return fetch(`${API}/post/getAll`, {
-		method: 'GET',
+		method: "GET",
 		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
+			Accept: "application/json",
+			"Content-Type": "application/json",
 		},
 	})
 		.then((res) => res.json())
@@ -145,22 +178,22 @@ export const getAllPost = () => {
 export const getPostOnSkip = (skipCount) => {
 	console.log(skipCount);
 	return fetch(`${API}/post/getAll?skipcount=${skipCount}`, {
-		method: 'GET',
+		method: "GET",
 		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
+			Accept: "application/json",
+			"Content-Type": "application/json",
 		},
 	})
 		.then((res) => res.json())
 		.catch((err) => console.log(err));
 };
 export const likeComment = (userId, commentId, token) => {
-	console.log('like it');
+	console.log("like it");
 	return fetch(`${API}/comment/like/${userId}/${commentId}`, {
-		method: 'PUT',
+		method: "PUT",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 	})
@@ -172,9 +205,9 @@ export const sendPost = (userId, token, post) => {
 	console.log(post, token, userId);
 
 	return fetch(`${API}/post/create/${userId}`, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-			Accept: 'application/json',
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 		body: post,
@@ -185,10 +218,10 @@ export const sendPost = (userId, token, post) => {
 
 export const likePost = (userId, token, postId) => {
 	return fetch(`${API}/post/like/${userId}/${postId}`, {
-		method: 'PUT',
+		method: "PUT",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 	})
@@ -198,10 +231,10 @@ export const likePost = (userId, token, postId) => {
 
 export const commentCreation = (userId, token, postId, description) => {
 	return fetch(`${API}/comment/create/${userId}/${postId}`, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({ description }),
@@ -212,10 +245,10 @@ export const commentCreation = (userId, token, postId, description) => {
 
 export const deleteMessage = (msgId, userId, token) => {
 	return fetch(`${API}/message/delete/${userId}/${msgId}`, {
-		method: 'DELETE',
+		method: "DELETE",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 	})
@@ -225,10 +258,10 @@ export const deleteMessage = (msgId, userId, token) => {
 
 export const isValidLink = (token) => {
 	return fetch(`${API}/user/reset-password?token=${token}`, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 		},
 	})
 		.then((res) => res.json())
@@ -236,10 +269,10 @@ export const isValidLink = (token) => {
 };
 export const changePassword = (email) => {
 	return fetch(`${API}/user/forget-password`, {
-		method: 'PUT',
+		method: "PUT",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 		},
 		body: JSON.stringify({ email }),
 	})
@@ -250,10 +283,10 @@ export const changePassword = (email) => {
 export const resetpassword = (password, token) => {
 	console.log(token);
 	return fetch(`${API}/user/update-password`, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
+			"Content-Type": "application/json",
+			Accept: "application/json",
 		},
 		body: JSON.stringify({ password, token }),
 	})

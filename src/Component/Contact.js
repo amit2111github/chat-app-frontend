@@ -41,32 +41,40 @@ const Contact = ({ history }) => {
   useEffect(() => {
     preloading();
   }, []);
-
+  console.log(contacts.length);
   return (
-    <>
-      <div style={{ overflow: "auto", backgroundColor: "#f0de6e" }}>
-        <Menu />
-        <div className="logo_section" style={{ height: "100px" }}>
-          <div className="container">
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="logo">
-                  <a href="logo">
-                    <img
-                      alt="logo"
-                      style={{ maxwidth: "100%" }}
-                      src="https://fontmeme.com/permalink/211220/293d7532b26cd531b84fcc2c6d4fa661.png"
-                    />
-                  </a>
-                </div>
+    <div
+      style={{
+        overflow: "auto",
+        backgroundColor: "#f0de6e",
+        position: "relative",
+        minHeight: "100vh",
+        height: "100%",
+      }}
+    >
+      <Menu />
+      <div className="logo_section" style={{ height: "100px" }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="logo">
+                <a href="logo">
+                  <img
+                    alt="logo"
+                    style={{ maxwidth: "100%" }}
+                    src="https://fontmeme.com/permalink/211220/293d7532b26cd531b84fcc2c6d4fa661.png"
+                  />
+                </a>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <h3 className="text-center mt-4" style={{ fontFamily: "cursive" }}>
-          FRIEND LIST
-        </h3>
+      <h3 className="text-center mt-4" style={{ fontFamily: "cursive" }}>
+        FRIEND LIST
+      </h3>
+      {contacts && contacts.length > 0 ? (
         <div
           className="container-sm border mb-2 border-dark rounded mt-4"
           style={{ backgroundColor: "#d9d4c7" }}
@@ -132,9 +140,12 @@ const Contact = ({ history }) => {
             );
           })}
         </div>
-        <Footer />
-      </div>
-    </>
+      ) : (
+        <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>
+          You have no Friends
+        </h1>
+      )}
+    </div>
   );
 };
 

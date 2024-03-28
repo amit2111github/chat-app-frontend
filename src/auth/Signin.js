@@ -96,7 +96,6 @@ const Signin = () => {
               changeShowPassword={changeShowPassword}
             />
           </div>
-          {/* logo ends here */}
         </div>
       </div>
       <Footer />

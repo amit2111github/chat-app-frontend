@@ -7,7 +7,7 @@ const SigninForm = React.forwardRef((props, ref) => {
     <div className="row">
       <div className="col-md-6 offset-sm-3 text-left">
         <form>
-          <div className=" mb-3 form-group">
+          <div className="mb-3 form-group">
             <label className="fw-bold" style={{ fontSize: "20px" }}>
               Email
             </label>
@@ -51,13 +51,12 @@ const SigninForm = React.forwardRef((props, ref) => {
               Sign In
             </a>
           </div>
-          <div className="createAccount row">
+          <div className="row">
             <div className="col-6">
               <a
                 href="signup"
                 className="createAccount"
                 style={{
-                  textDecoration: "none",
                   color: "black",
                   fontSize: "15px",
                   fontWeight: "normal",
@@ -66,12 +65,11 @@ const SigninForm = React.forwardRef((props, ref) => {
                 Create new Account
               </a>
             </div>
-            <div className="col-6">
+            <div className="col-6" style={{ textAlign: "right" }}>
               <a
                 href="forgetpassword"
                 className="createAccount "
                 style={{
-                  textDecoration: "none",
                   color: "black",
                   fontSize: "15px",
                   fontWeight: "normal",
